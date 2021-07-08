@@ -15,7 +15,7 @@ export default function CoinComponent({ id, symbol, name, image, current_price, 
               <p className={style.coin_symbol}>{ symbol }</p>
             </div>
             <div className={style.coin_data}>
-              <p className={style.coin_price}>{current_price}</p>
+              <p className={style.coin_price}>$ {current_price.toLocaleString()}</p>
               <p className={style.coin_volume}>{volume.toLocaleString()}</p>
               
               {price_change_24h < 0 ? (

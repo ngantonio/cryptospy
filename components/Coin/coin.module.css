@@ -5,10 +5,10 @@
 .coin_row {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-items: flex-start;
   align-items: center;
   height: 80px;
-  border-bottom: 1px solid #2e2e2e;
+  border-bottom: 2px dashed #2e2e2e;
   width: 1000px;
   padding: 0rem 2rem;
   cursor: pointer;
@@ -20,6 +20,7 @@
   display: flex;
   align-items: center;
   padding-right: 24px;
+  min-width: 300px;
 }
 .coin_img {
   height: 30px;
@@ -40,10 +41,11 @@
   width: 100%;
 }
 .coin_price {
-  width: 110px;
+  width: 115px;
+  text-align: right;
 }
 .coin_volume {
-  width: 155px;
+  width: 160px;
 }
 .coin_percent_red{
   width: 100px;
