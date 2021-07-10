@@ -26,16 +26,10 @@ function Chart({ price, data }) {
     
   };
   if (price === "0.00") {
-    return <h2>please select a currency pair</h2>;
+    return <h2>Please wait while we load the data . . .</h2>;
   }
   return (
-    <div className="dashboard">
-      <h2>{`$ ${parseFloat(price).toLocaleString()}`}</h2>
-
-      <div className="chart-container">
-        <Line data={data} options={opts} />
-      </div>
-    </div>
+    <Line data={data} options={opts} />
   );
 }
 

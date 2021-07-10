@@ -14,6 +14,12 @@ export const formatData = (data, color) => {
       ]
     };
   
+  if (!data.prices) {
+    finalData.labels = [];
+    finalData.datasets[0].data = [];
+    return finalData;
+  }
+  
   // green rgb(14, 203, 129) // red rgb(246, 70, 93)
   let dates = data.prices?.map((val) => {
       
@@ -21,7 +27,7 @@ export const formatData = (data, color) => {
     const hour = formattedDate.getHours() < 10 ? `0${formattedDate.getHours()}` : formattedDate.getHours();
     const minute = formattedDate.getMinutes() < 10 ? `0${formattedDate.getMinutes()}` : formattedDate.getMinutes();
 
-    var hours = hour+ ':' + minute;
+    var hours = hour+ ':' + minute + ' h';
 
       /*let day = formattedDate.getDate();
       let month = formattedDate.getMonth() + 1;

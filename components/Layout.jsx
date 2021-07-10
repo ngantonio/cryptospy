@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-const Layout = ({ children, title = "Crypto Spy" }) => {
+const Layout = ({ children, title = "CRYPTO SPY - by gabrielantonio" }) => {
   return (
     <div className="layout">
       <Head>
