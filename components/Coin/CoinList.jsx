@@ -1,7 +1,7 @@
 import React from 'react'
 import CoinComponent from './CoinComponent'
 
-export default function CoinList({ filteredCoins }){
+export default function CoinList({ filteredCoins }) {
   return (
     <>
       {filteredCoins.map(coin => {
