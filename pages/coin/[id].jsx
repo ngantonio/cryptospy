@@ -65,6 +65,7 @@ function Coin(id) {
       };
       
     }, 2000);
+    console.log("se ejecuta");
   }, []);
 
   return (

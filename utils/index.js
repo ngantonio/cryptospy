@@ -4,7 +4,7 @@ export const formatData = (data, color) => {
       labels: [],
       datasets: [
         {
-          label: "Price",
+          label: "Price (24h)",
           data: [],
           backgroundColor: color,
           borderColor: color,
@@ -18,7 +18,10 @@ export const formatData = (data, color) => {
   let dates = data.prices?.map((val) => {
       
     const formattedDate = new Date(val[0]);
-    var hour = formattedDate.getHours() + ':' + formattedDate.getMinutes();
+    const hour = formattedDate.getHours() < 10 ? `0${formattedDate.getHours()}` : formattedDate.getHours();
+    const minute = formattedDate.getMinutes() < 10 ? `0${formattedDate.getMinutes()}` : formattedDate.getMinutes();
+
+    var hours = hour+ ':' + minute;
 
       /*let day = formattedDate.getDate();
       let month = formattedDate.getMonth() + 1;
@@ -26,7 +29,7 @@ export const formatData = (data, color) => {
   
       let final = `${month}/${day}/${year}`;*/
       //return final;
-    return hour;
+    return hours;
     });
   
     let priceArr = data.prices.map((val) => {

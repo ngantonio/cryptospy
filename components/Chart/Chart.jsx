@@ -30,7 +30,7 @@ function Chart({ price, data }) {
   }
   return (
     <div className="dashboard">
-      <h2>{`$${price.toLocaleString()}`}</h2>
+      <h2>{`$ ${parseFloat(price).toLocaleString()}`}</h2>
 
       <div className="chart-container">
         <Line data={data} options={opts} />
