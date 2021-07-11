@@ -1,0 +1,30 @@
+.exchange_selector{
+  background: #222531;
+  color: #e2e2e2;
+  border: none;
+  padding: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  outline: none;
+  height: 40px;
+  width: 40%;
+  font-size: 14px;
+}
+
+.exchange_btn{
+  background: #222531;
+  border: none;
+  padding: 10px;
+  height: 40px;
+  font-size: 14px;
+  cursor: pointer;
+  overflow:visible;
+}
+
+.exchange_btn:hover{
+  background: #222582;
+}
+
+.exchange_price{
+  margin: 20px 0px 20px 0px;
+}
