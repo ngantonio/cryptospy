@@ -25,9 +25,9 @@ function Chart({ price, data }) {
     }
     
   };
-  if (price === "0.00") {
+  /*if (price === "0.00") {
     return <h2>Please wait while we load the data . . .</h2>;
-  }
+  }*/
   return (
     <Line data={data} options={opts} />
   );

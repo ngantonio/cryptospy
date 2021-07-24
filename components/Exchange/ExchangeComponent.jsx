@@ -2,12 +2,11 @@ import { useState } from 'react';
 import style from './exchange.module.css'
 import { fiatCoins } from '../../utils'
 
-const ExchangeComponent = () => {
+const ExchangeComponent = ({ coin }) => {
   const [fiat, setFiat] = useState("");
   const [loadingExchange, setLoadingExchange] = useState(false)
   const [fiatPrice, setFiatPrice] = useState(0)
 
-  let coin = "BTC";
   const handleExchange = async () => {
     setLoadingExchange(true) 
     const URL = `https://min-api.cryptocompare.com/data/price?fsym=${coin}&tsyms=${fiat}`;
@@ -29,7 +28,7 @@ const ExchangeComponent = () => {
 
   return (
     <>
-      <label htmlFor="cars">BTC to </label>
+      <label htmlFor="cars">{ `${coin} to`} </label>
       <select
         onChange={handleSelect}
         value={fiat}

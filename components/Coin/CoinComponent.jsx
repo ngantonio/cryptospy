@@ -1,12 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react'
-import Link  from 'next/link'
+import React, { useEffect } from 'react'
+import Router from 'next/router'
 import style from './coin.module.css'
 
 export default function CoinComponent({ id, symbol, name, image, current_price, market_cap, market_cap_rank, volume, high_24h, low_24h, price_change_24h }) {
+
+  useEffect(() => {
+    if (sessionStorage.getItem('coinObject')) {
+      sessionStorage.removeItem('coinObject')
+    }
+  }, [])
+  
+  
+  const toCoinPage = (id, symbol, image) => {
+    const coinObject = {
+      id,
+      symbol: symbol.toUpperCase(),
+      image
+    }
+    sessionStorage.setItem("coinObject", JSON.stringify(coinObject))
+    Router.push(`coin/${id}`)
+  };
+  
   return (
-    <Link href="/coin/[id]" as={`/coin/${id}`}>
-      <a>
+
+      <div onClick={() => toCoinPage(id, symbol, image)}>
         <div className={style.coin_container}>
           <div className={style.coin_row}>
             <div className={style.coin}>
@@ -27,7 +45,6 @@ export default function CoinComponent({ id, symbol, name, image, current_price, 
             </div>
           </div>
         </div>
-      </a>
-    </Link>
+      </div>
   )
 }

@@ -6,20 +6,20 @@ import ExchangeComponent from '../../components/Exchange/ExchangeComponent'
 import { formatData } from "../../utils";
 
 const Coin = ({ coin }) => {
-  const [pair, setPair] = useState("BTC-USD");
+  const [coinObject, setCoinObject] = useState({})
+  const [pair, setPair] = useState("");
   const [price, setprice] = useState("0.00");
   const [pastData, setpastData] = useState({});
   const ws = useRef(null);
   const url = "https://api.coingecko.com/api/v3";
-  const coin_id = "bitcoin";
   let previous_price = useRef(price);
 
 
 
   const fetchHistoricalData = useCallback(
-    async () => {
+    async (param) => {
     let dataArr = []
-    let historicalDataURL = `${url}/coins/${coin_id}/market_chart?vs_currency=usd&days=1`;
+    let historicalDataURL = `${url}/coins/${param}/market_chart?vs_currency=usd&days=1`;
     await fetch(historicalDataURL)
       .then((res) => res.json())
       .then((data) => {
@@ -31,9 +31,15 @@ const Coin = ({ coin }) => {
 )
 
   useEffect(() => {
-    let dataArr = [];
     ws.current = new WebSocket("wss://ws-feed.pro.coinbase.com");
+    const coinObject = JSON.parse(sessionStorage.getItem('coinObject'))
+    setCoinObject(coinObject)
+    setPair(`${coinObject.symbol}-USD`)
+    //console.log(pair);
+    let dataArr = [];
+    
     setTimeout(async () => {
+     dataArr = await fetchHistoricalData(coinObject.id);
            
       let msg = {
         type: "subscribe",
@@ -43,7 +49,7 @@ const Coin = ({ coin }) => {
       let jsonMsg = JSON.stringify(msg);
       ws.current.send(jsonMsg);
       
-      dataArr = await fetchHistoricalData();
+      dataArr = await fetchHistoricalData(coinObject.id);
       setpastData(formatData(dataArr, "rgb(14, 203, 129)"));
 
       // connect to the socket for get realtime coin proce
@@ -79,11 +85,11 @@ const Coin = ({ coin }) => {
       <div className="papi">
         <div className="stats_row">
           <div className="price_col">
-            <img src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" alt="bitcoin" className="coin_logo"/>
+            <img src={ coinObject.image } alt={coinObject.id} className="coin_logo"/>
             <h2>{`${parseFloat(price).toLocaleString()} USD`}</h2>
           </div>
           <div className="exchange_col">
-            <ExchangeComponent />
+            <ExchangeComponent coin={ coinObject.symbol } />
           </div>
         </div>
       </div>
